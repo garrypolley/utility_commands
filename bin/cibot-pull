@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+
+# This file is used to generate a custom command for our pull request bot at C2FO
+# It's very hard coded for me but it works to generate a command like:
+#
+# @CIBot pr me SUPP-53 C2FO c2fo SUPP-53 master @AndrewHeuermann @WesCravens @JasonCoble @RichardMoorhead
+#
+# It will print out the command you should give to the CIBot.
+# It also copies this command to your clipboard (if you are using mac)
+
+from subprocess import check_output
+from subprocess import Popen
+from subprocess import PIPE
+import sys
+
+# Get the current branch name
+branch_name = check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD'])
+
+# Gets the current repository information
+# Looks like:
+#   origin  git@github.com:C2FO/c2fo.git (fetch)
+#   origin  git@github.com:C2FO/c2fo.git (push)
+#
+remote_repo_info = check_output(['git', 'remote', '-v'])
+
+# Get the organization and repo name (e.g. ['C2FO', 'c2fo.git (fetch)'])
+org_repo_names = remote_repo_info.split('\n')[0].split(':')[1].split('/')
+org_name = org_repo_names[0]
+repository_name = org_repo_names[1].split('.git')[0]
+
+# Standard branch should be master, update if needed
+branch_target = 'master'
+
+# This is my current team the "supplier team".
+team = '@AndrewHeuermann @WesCravens @JasonCoble @RichardMoorhead'
+
+# Create the command that actually needs to be sent to the robot
+command_text = "@CIBot pr me {branch_name} {org_name} {repository_name} {branch_name} {branch_target} {team}".format(
+    branch_name=branch_name,
+    org_name=org_name,
+    repository_name=repository_name,
+    branch_target=branch_target,
+    team=team
+).replace('\n', '')
+
+sys.stdout.write(command_text + '\n')
+
+# Finally copy the command to the clipboard
+# Thank you stack overflow: http://stackoverflow.com/a/25802742
+def write_to_clipboard(output):
+    process = Popen(
+        'pbcopy', env={'LANG': 'en_US.UTF-8'}, stdin=PIPE)
+    process.communicate(output.encode('utf-8'))
+
+write_to_clipboard(command_text)
