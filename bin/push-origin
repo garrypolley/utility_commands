@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+
+# This file is used to push current branch to origin.
+
+from subprocess import check_output
+from subprocess import Popen
+from subprocess import PIPE
+import sys
+
+# Get the current branch name
+branch_name = check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD'])
+branch_name = branch_name.replace('\n', '')
+
+# Push the current branch
+branch_push = check_output(['git', 'push', 'origin', branch_name])
