@@ -1,0 +1,26 @@
+#!/usr/bin/env python
+
+import argparse
+from subprocess import check_output
+from subprocess import STDOUT
+
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('message', metavar='M', type=unicode, nargs=1,
+                   help='The message for the commit.')
+
+args = parser.parse_args()
+
+input_message = args.message[0]
+
+# Command to issue a commit with message. It will run
+# `git commit -m "BRANCH-NAME - MESSAGE"` so make sure
+# you've staged your files.
+
+# Get the current branch name
+branch_name = check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD'])
+branch_name = branch_name.replace('\n', '')
+
+message = "\"{branch} - {message}\"".format(branch=branch_name, message=input_message)
+
+# commit the branch with the name prefixed
+branch_push = check_output(['git', 'commit', '-m', message])
