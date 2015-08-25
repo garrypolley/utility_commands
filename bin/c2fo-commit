@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import argparse
+import sys
+from subprocess import CalledProcessError
 from subprocess import check_output
 from subprocess import STDOUT
 
@@ -23,4 +25,15 @@ branch_name = branch_name.replace('\n', '')
 message = "\"{branch} - {message}\"".format(branch=branch_name, message=input_message)
 
 # commit the branch with the name prefixed
-branch_push = check_output(['git', 'commit', '-m', message])
+
+try:
+    check_output(['git', 'commit', '-m', message])
+except CalledProcessError as e:
+    sys.stdout.write(u"FAILED TO COMMIT: \n \n ")
+    sys.stdout.write(u" ".join(e.cmd))
+    sys.stdout.write("\n")
+    sys.stdout.write(unicode(e.output))
+    sys.stdout.write("\n")
+
+    sys.exit(1)
+sys.exit(0)
