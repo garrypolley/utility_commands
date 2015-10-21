@@ -3,7 +3,7 @@
 # This file is used to generate a custom command for our pull request bot at C2FO
 # It's very hard coded for me but it works to generate a command like:
 #
-# @CIBot pr me SUPP-53 C2FO c2fo SUPP-53 master @AndrewHeuermann @WesCravens @JasonCoble @RichardMoorhead
+# @CIBot pr me SUPP-53 C2FO c2fo SUPP-53-cool-stuff develop @AndrewHeuermann @WesCravens @JasonCoble @RichardMoorhead
 #
 # It will print out the command you should give to the CIBot.
 # It also copies this command to your clipboard (if you are using mac)
@@ -28,14 +28,18 @@ org_repo_names = remote_repo_info.split('\n')[0].split(':')[1].split('/')
 org_name = org_repo_names[0]
 repository_name = org_repo_names[1].split('.git')[0]
 
-# Standard branch should be master, update if needed
-branch_target = 'master'
+# Standard branch should be develop, update if needed
+branch_target = 'develop'
 
-# This is my current team the "supplier team".
-team = '@AndrewHeuermann @WesCravens @JasonCoble @RichardMoorhead'
+# This is my current team the "tpf team".
+team = '@AndyMoon @RussellMadsen'
+
+# Get JIRA number from branch name
+jira_number = '-'.join(branch_name.split('-')[:2])
 
 # Create the command that actually needs to be sent to the robot
-command_text = "@CIBot pr me {branch_name} {org_name} {repository_name} {branch_name} {branch_target} {team}".format(
+command_text = "@CIBot pr me {jira_number} {org_name} {repository_name} {branch_name} {branch_target} {team}".format(
+    jira_number=jira_number,
     branch_name=branch_name,
     org_name=org_name,
     repository_name=repository_name,
