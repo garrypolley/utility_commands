@@ -14,14 +14,14 @@ from subprocess import PIPE
 import sys
 
 # Get the current branch name
-branch_name = check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD'])
+branch_name = check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).decode('UTF-8')
 
 # Gets the current repository information
 # Looks like:
 #   origin  git@github.com:C2FO/c2fo.git (fetch)
 #   origin  git@github.com:C2FO/c2fo.git (push)
 #
-remote_repo_info = check_output(['git', 'remote', '-v'])
+remote_repo_info = check_output(['git', 'remote', '-v']).decode('UTF-8')
 
 # Get the organization and repo name (e.g. ['C2FO', 'c2fo.git (fetch)'])
 org_repo_names = remote_repo_info.split('\n')[0].split(':')[1].split('/')
@@ -32,7 +32,7 @@ repository_name = org_repo_names[1].split('.git')[0]
 branch_target = 'develop'
 
 # This is my current team the "tpf team".
-team = '@AndyMoon @RussellMadsen'
+team = '@AndyMoon @RussellMadsen @ChrisGurba @ScottDillender'
 
 # Get JIRA number from branch name
 jira_number = '-'.join(branch_name.split('-')[:2])
