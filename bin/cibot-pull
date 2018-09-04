@@ -32,13 +32,16 @@ repository_name = org_repo_names[1].split('.git')[0]
 branch_target = 'develop'
 
 # This is my current team the "tpf team".
-team = '@AndyMoon @RussellMadsen @ChrisGurba @ScottDillender'
+team = '@AndyMoon @ChrisGurba @ScottDillender @MattHoag'
+other_team = '@ThomasCarroll @ChrisStein @JonathanStacks @JeffStephens'
+
+team = other_team
 
 # Get JIRA number from branch name
 jira_number = '-'.join(branch_name.split('-')[:2])
 
 # Create the command that actually needs to be sent to the robot
-command_text = "@CIBot pr me {jira_number} {org_name} {repository_name} {branch_name} {branch_target} {team}".format(
+command_text = "@cibot pr me {jira_number} {org_name} {repository_name} {branch_name} {branch_target} {team}".format(
     jira_number=jira_number,
     branch_name=branch_name,
     org_name=org_name,
