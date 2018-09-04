@@ -1,0 +1,47 @@
+#!/usr/bin/env python
+import json
+import os
+import sys
+
+import requests
+
+def get_input():
+    lines = ''
+
+    for line in sys.stdin:
+        lines += line
+
+    return lines
+
+
+def get_auth_token():
+    return os.environ['C2FO_SLACK_CIBOT_TOKEN']
+
+
+def get_url():
+    return 'https://slack.com/api/chat.postMessage'
+
+
+def send_message(message, auth_token):
+    headers = {
+        "Authorization": "Bearer {auth_token}".format(auth_token=auth_token),
+        "Content-Type": "application/json"
+    }
+    post_body = {
+        "text": message,
+        "channel": 'robot-arms-apts_',
+        "as_user": True
+    }
+
+    return requests.post(
+        get_url(),
+        headers=headers,
+        data=json.dumps(post_body)
+    )
+
+# Send message by default.
+response = send_message(get_input(), get_auth_token())
+
+print("Slack status: {status_code}".format(status_code=response.status_code))
+print("Response: ")
+print(response.content)
