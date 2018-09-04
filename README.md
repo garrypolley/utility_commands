@@ -14,6 +14,15 @@ To make this use full add `~/utility_commands/bin` to your `PATH`.
 
 ## Setup
 
+### slack-message
+
+`slack-message` allows you to send a message to a slack channel. Hard coded
+to internal c2fo slack for now.
+
+1. The python [requests][requests-library] library. (`pip install requests`)
+1. An environment variable `C2FO_SLACK_CIBOT_TOKEN`. You can generate that [here][slack-token-url]
+1. Pass a message to the command: `echo "testing the cli" | slack-message`
+
 ### hipchat-message
 
 The hipchat-message command requires the following:
@@ -29,6 +38,11 @@ Command I actually use:
 
 `cibot-pull | hipchat-message`
 
+Or
+
+`cibot-pull | slack-message`
+
+
 [cibot-pull]: bin/cibot-pull
 [git_rm_local]: bin/git_rm_local
 [push-origin]: bin/push-origin
@@ -37,3 +51,4 @@ Command I actually use:
 [hipchat-message]: bin/hipchat-message
 [hipchat-token-url]: https://c2fo.hipchat.com/account/api
 [requests-library]: http://docs.python-requests.org/en/latest/
+[slack-token-url]: https://api.slack.com/custom-integrations/legacy-tokens
