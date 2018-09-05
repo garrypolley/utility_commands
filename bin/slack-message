@@ -30,7 +30,9 @@ def send_message(message, auth_token):
     post_body = {
         "text": message,
         "channel": 'robot-arms-apts',
-        "as_user": True
+        "as_user": True,
+        "link_names": True,
+        "mrkdwn": False
     }
 
     return requests.post(

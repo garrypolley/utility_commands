@@ -13,6 +13,8 @@ from subprocess import Popen
 from subprocess import PIPE
 import sys
 
+
+
 # Get the current branch name
 branch_name = check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).decode('UTF-8')
 
@@ -31,23 +33,37 @@ repository_name = org_repo_names[1].split('.git')[0]
 # Standard branch should be develop, update if needed
 branch_target = 'develop'
 
-# This is my current team the "tpf team".
-team = '@AndyMoon @ChrisGurba @ScottDillender @MattHoag'
-other_team = '@ThomasCarroll @ChrisStein @JonathanStacks @JeffStephens'
 
-team = other_team
+if len(sys.argv) > 1:
+    branch_target = sys.argv[1]
+
+# This is my current team the "tpf team".
+team = '<@andy.moon> <@chrisgurba> <@scottdillender> <@matthoag> <@jeetdas>'
+other_team = '<@chrisstein> <@thomas.carroll> <@jeffstephens> <@jonathanstacks>'
+
+whole_team = team + ' ' + other_team
+
+used_team = team
+if len(sys.argv) > 2:
+    arg = sys.argv[2]
+    if arg == 'whole_team':
+        used_team = whole_team
+    elif arg == 'devops':
+        used_team = other_team
+    else:
+        used_team = team
 
 # Get JIRA number from branch name
 jira_number = '-'.join(branch_name.split('-')[:2])
 
 # Create the command that actually needs to be sent to the robot
-command_text = "@cibot pr me {jira_number} {org_name} {repository_name} {branch_name} {branch_target} {team}".format(
+command_text = "<@cibot> pr me {jira_number} {org_name} {repository_name} {branch_name} {branch_target} {team}".format(
     jira_number=jira_number,
     branch_name=branch_name,
     org_name=org_name,
     repository_name=repository_name,
     branch_target=branch_target,
-    team=team
+    team=used_team
 ).replace('\n', '')
 
 sys.stdout.write(command_text + '\n')
