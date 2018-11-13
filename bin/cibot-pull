@@ -39,7 +39,7 @@ if len(sys.argv) > 1:
 
 # This is my current team the "tpf team".
 team = '<@andy.moon> <@chrisgurba> <@scottdillender> <@matthoag> <@jeetdas>'
-other_team = '<@chrisstein> <@thomas.carroll> <@jeffstephens> <@jonathanstacks>'
+other_team = '<@chrisstein> <@thomas.carroll> <@jeffstephens> <@jonathanstacks> <@ryan.baker>'
 
 whole_team = team + ' ' + other_team
 
