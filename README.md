@@ -31,6 +31,15 @@ The hipchat-message command requires the following:
 1. An environment variable `HIPCHAT_MESSAGE_TOKEN`. You can generate that [here][hipchat-token-url]
 2. Pass a message to the command: `echo "testing the cli" | hipchat-message`
 
+### cibot-pull
+
+The `cibot-pull` command will work based on the teams in the file. There are two team options. It defauls to using the first team. Also, you can sepcify a branch. 
+
+* `cibot-pull` -- does the pull against develop with the default team
+* `cibot-pull BRANCH` -- does the branch with default team
+* `cibot-pull BRANCH whole_team` does the branch with the devops and team
+* `cibot-pull BRANCH devops` -- does the branch with devops team
+
 Right now the room is hardcoded to where I want to post my automated messages. If you work at C2FO this may
 work well for you too.
 
