@@ -40,7 +40,7 @@ if len(sys.argv) > 1:
     branch_target = sys.argv[1]
 
 # This is my current team the "tpf team".
-tpf_team = '<@andy.moon> <@chrisgurba> <@scottdillender> <@matthoag> <@jeetdas>'
+tpf_team = '<@andy.moon> <@chrisgurba> <@scottdillender> <@jeetdas>'
 team = '<@dustinsmith> <@jonathanstacks>'
 devops = '<@chrisstein> <@thomas.carroll> <@jeffstephens> <@jonathanstacks> <@ryan.baker>'
 
