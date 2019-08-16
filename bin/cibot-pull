@@ -41,8 +41,11 @@ if len(sys.argv) > 1:
 
 # This is my current team the "tpf team".
 tpf_team = '<@andy.moon> <@chrisgurba> <@scottdillender> <@jeetdas>'
-team = '<@dustinsmith> <@jonathanstacks>'
-devops = '<@chrisstein> <@thomas.carroll> <@jeffstephens> <@jonathanstacks> <@ryan.baker>'
+devops = '<@chrisstein> <@thomas.carroll> <@jeffstephens> <@ryan.baker>'
+atlas = '<@matthoag> <@anthonyshipman> <@michaelprittie> <@hoale>'
+
+team = '<@dustinsmith>'
+team = '{atlas} <@dustinsmith>'.format(atlas=atlas)
 
 whole_team = join_teams(team, devops, tpf_team)
 app_team = join_teams(team, tpf_team)
@@ -58,6 +61,8 @@ if len(sys.argv) > 2:
         used_team = tpf_team
     elif arg == 'app_team':
         used_team = app_team
+    elif arg == 'atlas':
+        used_team = atlas
     else:
         used_team = team
 
