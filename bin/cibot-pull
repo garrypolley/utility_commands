@@ -44,8 +44,8 @@ tpf_team = '<@andy.moon> <@chrisgurba> <@scottdillender> <@jeetdas>'
 devops = '<@chrisstein> <@thomas.carroll> <@jeffstephens> <@ryan.baker>'
 atlas = '<@matthoag> <@anthonyshipman> <@michaelprittie> <@hoale>'
 
-team = '<@dustinsmith>'
-team = '{atlas} <@dustinsmith>'.format(atlas=atlas)
+team = '<@dustinsmith> <@nancy.holder> <@chrisstein> <@ryan.baker>'
+team = '{atlas} {team}'.format(atlas=atlas, team=team)
 
 whole_team = join_teams(team, devops, tpf_team)
 app_team = join_teams(team, tpf_team)
