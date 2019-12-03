@@ -43,9 +43,10 @@ if len(sys.argv) > 1:
 tpf_team = '<@andy.moon> <@chrisgurba> <@scottdillender> <@jeetdas>'
 devops = '<@chrisstein> <@thomas.carroll> <@jeffstephens> <@ryan.baker>'
 atlas = '<@matthoag> <@anthonyshipman> <@michaelprittie> <@hoale>'
+web_team = '<@nancy.holder> <@dylanstanfield> <@josh.herder> <@jordan.vanwinkle> <@dustinsmith> <@michael.westblade> <@rhia.dixon> <@eric.kemmis>'
 
-team = '<@dustinsmith> <@nancy.holder> <@chrisstein> <@ryan.baker>'
-team = '{atlas} {team}'.format(atlas=atlas, team=team)
+team = '<@nancy.holder> <@michael.westblade> <@matthoag> <@rhia.dixon> <@eric.kemmis>'
+devops_team = '<@chrisstein> <@ryan.baker>'
 
 whole_team = join_teams(team, devops, tpf_team)
 app_team = join_teams(team, tpf_team)
@@ -61,8 +62,12 @@ if len(sys.argv) > 2:
         used_team = tpf_team
     elif arg == 'app_team':
         used_team = app_team
+    elif arg == 'devops_and_team':
+        used_team = '{devops_team} {team}'.format(devops_team=devops_team, team=team)
     elif arg == 'atlas':
         used_team = atlas
+    elif arg == 'web_team':
+        used_team = web_team
     else:
         used_team = team
 
