@@ -30,7 +30,15 @@ remote_repo_info = check_output(['git', 'remote', '-v']).decode('UTF-8')
 # Get the organization and repo name (e.g. ['C2FO', 'c2fo.git (fetch)'])
 org_repo_names = remote_repo_info.split('\n')[0].split(':')[1].split('/')
 org_name = org_repo_names[0]
-repository_name = org_repo_names[1].split('.git')[0]
+repository_name = org_repo_names[1].split('.git')[0].split(' ')[0]
+
+# Push the branch to the matching remote
+remote_name = check_output(['git', 'remote']).decode('UTF-8').replace('\n', '')
+branch_name_no_newline = branch_name.replace('\n', '')
+# Setup remote tracking
+check_output(['git', 'branch','-u', remote_name + '/' + branch_name_no_newline, '--quiet'])
+# Push the brach
+check_output(['git', 'push', '-q', remote_name, branch_name_no_newline])
 
 # Standard branch should be develop, update if needed
 branch_target = 'develop'
@@ -41,7 +49,7 @@ if len(sys.argv) > 1:
 
 # This is my current team the "tpf team".
 tpf_team = '<@andy.moon> <@chrisgurba> <@scottdillender> <@jeetdas>'
-devops = '<@chrisstein> <@thomas.carroll> <@jeffstephens> <@ryan.baker>'
+devops = '<@chrisstein> <@thomas.carroll> <@jeffstephens> <@ryan.baker> <@evan.gibler> <@matthew.hembree>'
 atlas = '<@matthoag> <@anthonyshipman> <@michaelprittie> <@hoale>'
 web_team = '<@nancy.holder> <@dylanstanfield> <@josh.herder> <@jordan.vanwinkle> <@dustinsmith> <@michael.westblade> <@rhia.dixon> <@eric.kemmis>'
 

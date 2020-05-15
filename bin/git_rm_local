@@ -9,10 +9,10 @@ from subprocess import CalledProcessError
 check_call(['git', 'remote', 'prune', 'origin'])
 
 # Second get all of our remote branches
-remote_branches_output = check_output(['git', 'branch',  '-r'])
+remote_branches_output = check_output(['git', 'branch',  '-r']).decode('UTF-8')
 
 # Get all of our local branches
-local_branches_output = check_output(['git', 'branch'])
+local_branches_output = check_output(['git', 'branch']).decode('UTF-8')
 
 # Get our remote branches into a list we can iterate over
 remote_branches_list = remote_branches_output.split('\n')
@@ -34,4 +34,4 @@ for local_branch in local_branches_list:
             pass
     branches_not_deleted.append(local_branch)
 
-print u"Branches not deleted: {0}".format(str(branches_not_deleted))
+print(u"Branches not deleted: {0}".format(str(branches_not_deleted)))
