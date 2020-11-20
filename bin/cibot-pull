@@ -53,7 +53,7 @@ devops = '<@chrisstein> <@thomas.carroll> <@jeffstephens> <@ryan.baker> <@evan.g
 atlas = '<@matthoag> <@anthonyshipman> <@michaelprittie> <@hoale>'
 web_team = '<@nancy.holder> <@dylanstanfield> <@josh.herder> <@jordan.vanwinkle> <@dustinsmith> <@michael.westblade> <@rhia.dixon> <@eric.kemmis>'
 
-team = '<@nancy.holder> <@michael.westblade> <@matthoag> <@rhia.dixon> <@eric.kemmis>'
+team = '<@eric.kemmis> <@imon.stevenson>'
 devops_team = '<@chrisstein> <@ryan.baker>'
 
 whole_team = join_teams(team, devops, tpf_team)
